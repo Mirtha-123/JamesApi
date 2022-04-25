@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  app:
+    container_name: JamesApp
+    restart: always
+    build: .
+    ports:
+      - "5000:3000"
+    links:
+      - mongo
+  mongo:
+    image: mongo:latest
+    restart: always
+    container_name: mongobd
+    volumes:
+      - ./data:/data/db
+      - ./data/log:/var/log/mongodb/
+    ports:
+      - "27018:27017"
+         
